@@ -13,16 +13,20 @@ describe('User API - POST Endpoints', function () {
 
     const validPostScenarios = [
         {
-            description: "Full Body Payload",
+            description: "Full Body Payload Create User",
             payload: { email: "edyribowo@gmail.com", first_name: "Edy", last_name: "Ribowo", avatar: "https://reqres.in/img/faces/2-image.jpg" }
         },
         {
-            description: "Missing Email Field",
+            description: "Missing Email Field Create User",
             payload: { first_name: "Edy", last_name: "Ribowo", avatar: "https://reqres.in/img/faces/2-image.jpg" }
         },
         {
-            description: "Completely Empty Body",
+            description: "Completely Empty Body Create User",
             payload: {}
+        },
+        {
+            description: "Invalid Body Create User",
+            payload: "invalid"
         }
     ];
 
@@ -35,7 +39,7 @@ describe('User API - POST Endpoints', function () {
             expect(response.data).to.have.property('id');
 
             // Verify the responses is same as registered
-            const expectedUser = new User(scenario.payload);
+            const expectedUser = new User(scenario.payload as User);
             const actualUser = new User(response.data);
 
             expect(actualUser.email).to.equal(expectedUser.email);

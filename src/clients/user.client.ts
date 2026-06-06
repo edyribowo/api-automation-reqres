@@ -19,4 +19,12 @@ export class UserClient {
     public static async createUser(userData: User | null) {
         return axios.post(`${this.ENDPOINT}`, userData);
     }
+
+    /**
+     * Update a user.
+     * @param userData The data for the user to update
+     */
+    public static async updateUser(userId: string | number | null, userData: User | null) {
+        return axios.put(`${this.ENDPOINT}/${userId}`, userData);
+    }
 }
