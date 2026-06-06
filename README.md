@@ -92,12 +92,6 @@ For every endpoint, the following acceptance criteria are structurally evaluated
 
 ## ⚠️ Notes on ReqRes Mock API Limitations
 
-
-
-https://github.com/user-attachments/assets/e1b17a01-914a-4811-8623-f1c2a9820161
-
-
-
 Because ReqRes is a public, free mock server, it lacks the strict backend validation of a real enterprise application. 
 
 **Skipped Tests (`it.skip`)**
