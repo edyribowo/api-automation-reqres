@@ -34,24 +34,22 @@ describe('User API - GET Endpoints', function () {
     });
 
     // 2. Negative Edge Cases (Invalid Identifiers)
-    it('Negative: should return 404 for NULL ID', async () => {
-        try {
-            await UserClient.getUserById(null);
-        } catch (error: any) {
-            expect(error.response?.status).to.equal(404, 'Expected 404 status but got different error');
-            return;
-        }
-        expect.fail('Expected request to fail with a 404 status, but it succeeded');
-    });
+    const invalidUsers = [
+        { description: "NULL ID", id: null },
+        { description: "invalid string ID", id: "abc" },
+        { description: "Negative Integer ID", id: -1 }
+    ];
 
-    it('Negative: should return 404 for invalid string ID', async () => {
-        try {
-            await UserClient.getUserById("abc");
-        } catch (error: any) {
-            expect(error.response?.status).to.equal(404, 'Expected 404 status but got different error');
-            return;
-        }
-        expect.fail('Expected request to fail with a 404 status, but it succeeded');
+    invalidUsers.forEach((scenario) => {
+        it(`Negative: should return 404 for ${scenario.description}`, async () => {
+            try {
+                await UserClient.getUserById(scenario.id);
+            } catch (error: any) {
+                expect(error.response?.status).to.equal(404, 'Expected 404 status but got different error');
+                return;
+            }
+            expect.fail('Expected request to fail with a 404 status, but it succeeded');
+        });
     });
 
     it('Edge Case: should return the list of users (200 OK) for Empty ID', async () => {
