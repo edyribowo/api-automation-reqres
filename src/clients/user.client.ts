@@ -13,6 +13,14 @@ export class UserClient {
     }
 
     /**
+     * Fetches a paginated list of users.
+     * @param page The page number to fetch
+     */
+    public static async getUsersByPage(page: number | null) {
+        return axios.get(`${this.ENDPOINT}?page=${page}`);
+    }
+
+    /**
      * Creates a new user.
      * @param userData The data for the user to create
      */
