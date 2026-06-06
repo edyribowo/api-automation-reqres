@@ -5,7 +5,7 @@ import { User } from '../../src/models/user';
 import { UserClient } from '../../src/clients/user.client';
 
 describe('User API - GET Endpoints', function () {
-    // Apply timeout to all tests in this suite
+    // This timeout for latency call purposes
     this.timeout(15000);
 
     before(() => {
