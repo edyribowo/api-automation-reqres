@@ -2,11 +2,18 @@ import axios from 'axios';
 import * as path from 'path';
 import * as fs from 'fs';
 
+let isConfigured = false;
+
 /**
  * Loads environment variables from `.env` (using Node's native env loader)
  * and configures Axios global defaults such as the API key.
  */
 export function setupApiConfig(): void {
+    if (isConfigured) {
+        return;
+    }
+    isConfigured = true;
+
     const envPath = path.resolve(process.cwd(), '.env');
     if (fs.existsSync(envPath)) {
         try {
@@ -19,6 +26,11 @@ export function setupApiConfig(): void {
     const apiKey = process.env.REQRES_API_KEY;
     if (apiKey) {
         axios.defaults.headers.common['x-api-key'] = apiKey;
+    }
+
+    const baseUrl = process.env.BASE_URL;
+    if (baseUrl) {
+        axios.defaults.baseURL = baseUrl;
     }
 
     // Request interceptor for logging
