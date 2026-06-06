@@ -57,6 +57,19 @@ To run a specific test file, use `npx mocha`:
 npx mocha -r ts-node/register tests/api/get.user.spec.ts
 ```
 
+### 🏷 Running Specific Tags (e.g., @smoke)
+Unlike Cucumber which has native `@` annotations, Mocha uses standard text filtering via the `--grep` flag. 
+
+To create a tagged test, simply add the tag directly into the test description in your code:
+```typescript
+it('@smoke Positive: Should Create a New User', async () => { ... })
+```
+
+Then, execute only the tagged tests from the terminal by passing the grep flag:
+```bash
+npx mocha -r ts-node/register tests/**/*.spec.ts --grep "@smoke"
+```
+
 ---
 
 ## 🧪 Test Coverage
