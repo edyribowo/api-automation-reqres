@@ -27,4 +27,12 @@ export class UserClient {
     public static async updateUser(userId: string | number | null, userData: User | null) {
         return axios.put(`${this.ENDPOINT}/${userId}`, userData);
     }
+
+    /**
+     * Delete a user.
+     * @param userId The ID of the user to delete
+     */
+    public static async deleteUserById(userId: string | number | null) {
+        return axios.delete(`${this.ENDPOINT}/${userId}`);
+    }
 }
